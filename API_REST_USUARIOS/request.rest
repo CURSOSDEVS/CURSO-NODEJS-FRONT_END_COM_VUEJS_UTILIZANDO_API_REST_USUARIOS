@@ -1,0 +1,61 @@
+
+//variáveis de configuração
+@apiurl = http://localhost:8686
+
+###
+//rota para carregar todos os usuário
+GET {{apiurl}}/user
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InN0aEBhIiwicm9sZSI6MSwiaWF0IjoxNjQxNDI1NzYyfQ.sF0bV6qvDJtGFO7x7yWbUxtAPWte1GRA7Q21OrBrx6I
+
+####
+
+//rota para criacção de novo usuário
+POST {{apiurl}}/user
+Content-Type: application/json
+Authorization: token xxxxx
+
+{
+    "name" : "Caroline",
+    "email" : "carol@teste",
+    "password" : "carol",
+    "role" : 0
+
+}
+
+###
+
+//rota para editar os dados de um usuário
+ // incluir no json somente os campos que serão alterados var {id, name, email, role} = req.body;
+PUT {{apiurl}}/user
+Content-Type: application/json
+Authorization: token xxxxx
+
+{
+    "id": 3,
+    "name": "Sthefany S.F. alves",
+    "password":"aaaabbbb",
+    "role": 1
+}
+
+
+###
+//rota para login do usuário admin
+POST {{apiurl}}/login 
+Content-Type: application/json
+
+{
+    "email" : "sth@a" ,
+    "password" : "1234"
+}
+
+###
+//rota para auteração da senha
+PUT {{apiurl}}/changepassword
+Content-Type: application/json
+
+{
+    "token" : "11a13626-dceb-40d8-a595-7fd76c9d6c6c" ,
+    "newPassword" : "1234"
+}
+
+####
