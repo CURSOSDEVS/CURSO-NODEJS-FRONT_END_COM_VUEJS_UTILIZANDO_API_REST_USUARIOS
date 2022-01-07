@@ -35,4 +35,7 @@ router.post('/login', UserController.login);
 //rota para teste de envio de email
 router.get('/envioemail', UserController.sendEmail)
 
+//rota para acesso do painel administrativo
+router.post('/validate',AdminAuth ,HomeController.validate)
+
 module.exports = router;

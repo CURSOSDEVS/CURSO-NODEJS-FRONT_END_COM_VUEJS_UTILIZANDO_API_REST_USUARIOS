@@ -51,7 +51,8 @@ export default {
                password: this.password
            }).then(res=>{
                console.log(res);
-               this.$router.push({name: 'SucessRegister'});
+               localStorage.setItem('token',res.data.tokenJwt);
+               this.$router.push({name: 'Users'});
            }).catch(err=>{
                
                this.error = err.response.data.err;

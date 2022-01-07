@@ -21,7 +21,7 @@ module.exports = function(req, res, next){
                 return;
             }          
         } catch (error) {
-            res.status(401);
+            res.status(403);
             res.send("Erro de autenticação, token inválido");
             return;
         }   
