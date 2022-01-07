@@ -56,7 +56,9 @@
         </div>   
     </div>    
 </template>
+
 <script>
+import axios from 'axios';
 export default {
     data(){
         return{
@@ -67,9 +69,16 @@ export default {
     },
     methods:{
         register(){
-            console.log(this.name);
-            console.log(this.email);
-            console.log(this.password);
+            axios.post('http://localhost:8686/user',{
+                name: this.name,
+                password: this.password,
+                email: this.email
+            }).then(res =>{
+                console.log(res);
+            }).catch(err=>{
+                var errMens = err.response.data.err;
+                console.log(errMens);
+            });
         }
     }
 

@@ -9,7 +9,7 @@ var AdminAuth = require('../middleware/AdminAuth');
 router.get('/', HomeController.index);
 
 //rota para criar um novo usuário
-router.post('/user', AdminAuth, UserController.create);
+router.post('/user', UserController.create);
 
 //rota para listar todos os usuário em json mas somente poderá acessar os administradores
 router.get('/user', UserController.index);
