@@ -3,8 +3,6 @@
         <h1 style="padding-top:40px">Registro de Usuário</h1>
                 <hr>       
         <div class="columns is-centered">
-          
-                
                 <div class="column is-one-third">
 
                     <div v-if="error !=undefined">
@@ -69,6 +67,7 @@
 
 <script>
 import axios from 'axios';
+import config from '../config/Config'
 export default {
     data(){
         return{
@@ -80,7 +79,7 @@ export default {
     },
     methods:{
         register(){
-            axios.post('http://localhost:8686/user',{
+            axios.post(config.hostApi+'user',{
                 name: this.name,
                 password: this.password,
                 email: this.email

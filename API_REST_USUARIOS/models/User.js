@@ -180,7 +180,7 @@ class User {
                 return {status: false, err:"Verifique o email informado"};
             }
         } catch (error) {
-            return{status: false, err:"Erro no Knex findbyemail: "+error};
+            return {status: false, err:"Erro no Knex findbyemail: "+error};
         }
     }
 

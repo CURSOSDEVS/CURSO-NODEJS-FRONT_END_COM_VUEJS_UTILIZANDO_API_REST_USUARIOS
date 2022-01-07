@@ -194,8 +194,14 @@ class UserController{
             }
             
         }else{
+            
+            
+            //res.status(404).send("Usuário não localizado");
             res.status(404);
-            res.send("Usuário não encontrado");
+            //res.send("Usuário não localizado");
+            res.json({err: "Usuário não localizado"})
+            return ;           
+            //res.send("Usuário não encontrado");
         }
 
     }
