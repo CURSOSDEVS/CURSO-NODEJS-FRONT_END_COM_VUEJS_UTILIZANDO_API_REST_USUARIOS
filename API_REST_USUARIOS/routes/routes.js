@@ -6,13 +6,13 @@ var UserController = require("../controllers/UserController");
 var AdminAuth = require('../middleware/AdminAuth');
 
 //rota para acessar a home da página
-router.get('/', HomeController.index);
+//router.get('/', HomeController.index);
 
 //rota para criar um novo usuário
 router.post('/user', UserController.create);
 
 //rota para listar todos os usuário em json mas somente poderá acessar os administradores
-router.get('/user', UserController.index);
+router.get('/user', AdminAuth, UserController.index);
 
 //rota para buscar um usuário pelo id passado como parâmetro na rota
 router.get('/user/:id', UserController.findUser);

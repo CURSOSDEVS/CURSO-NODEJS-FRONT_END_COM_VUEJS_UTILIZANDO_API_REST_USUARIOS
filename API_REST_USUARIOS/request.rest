@@ -31,9 +31,9 @@ Content-Type: application/json
 Authorization: token xxxxx
 
 {
-    "id": 3,
-    "name": "Sthefany S.F. alves",
-    "password":"aaaabbbb",
+    "id": 11,
+    "name": "Maria",
+    "password":"1234",
     "role": 1
 }
 
@@ -44,7 +44,7 @@ POST {{apiurl}}/login
 Content-Type: application/json
 
 {
-    "email" : "sth@a" ,
+    "email" : "maria@uol.com" ,
     "password" : "1234"
 }
 

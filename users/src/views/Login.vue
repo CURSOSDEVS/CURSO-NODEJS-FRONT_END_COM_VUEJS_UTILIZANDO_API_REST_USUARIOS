@@ -52,6 +52,7 @@ export default {
            }).then(res=>{
                console.log(res);
                localStorage.setItem('token',res.data.tokenJwt);
+               //config.tokenLocalStorage = localStorage.getItem('token');
                this.$router.push({name: 'Users'});
            }).catch(err=>{
                
