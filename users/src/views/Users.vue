@@ -70,16 +70,43 @@
                         <td>{{user.role | processRole}}</td>
                         <td>
                             <button class="button is-primary">Editar</button>
-                            <button class="button is-danger">Excluir</button>
+                            <button class="button is-danger"  @click="showModalUser(user.id)" >Excluir</button>
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
 
-        <!--modal da confirmação de deleção
-        
-        -->
+        <!--modal da confirmação de deleção-->
+        <div :class="{modal:true, 'is-active':showModal}">
+            <div class="modal-background"></div>
+            <div class="modal-content">
+                <!-- Any other Bulma elements you want -->
+                
+                <!--Card com as opções de confirmar e cancelar exclusão-->
+                <div class="card">
+                    <header class="card-header">
+                        <p class="card-header-title">
+                        Você quer realmente deletar este usuário?
+                        </p>
+                    </header>
+                    <div class="card-content">
+                        <div class="content">
+                        BLA, BLA BLA
+                        </div>
+                    </div>
+                    <footer class="card-footer">
+                        <a href="#" class="card-footer-item" @click="hideModal()">Cancelar</a>
+                        <a href="#" class="card-footer-item">Sim quero apagar este Usuário.</a>
+                    </footer>
+                </div>
+
+                <!--final do card-->
+                
+            </div>
+            <button class="modal-close is-large" aria-label="close" @click="hideModal()"></button>
+        </div>
+        <!--final do modal-->
         
     </div>    
 </template>
@@ -91,6 +118,7 @@ export default {
     data(){
         return{
             users: [],
+            showModal : false,
             userid: -1
         }
     },
@@ -111,9 +139,16 @@ export default {
         });
     },
     methods:{
-        delete(){
-            console.log(this.userid)
-        }
+        hideModal(){
+            this.showModal = false;
+        },
+
+        showModalUser(id){
+            console.log("Id do user: "+ id);
+            this.showModal = true;
+            this.userid = id;
+        },
+       
     },
     //essa propriedade possibilita a criação de filtros que serão utilizados no interface com o usuário
     filters:{
