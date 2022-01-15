@@ -5,7 +5,7 @@
 ###
 //rota para carregar todos os usuário
 GET {{apiurl}}/user
-Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InN0aEBhIiwicm9sZSI6MSwiaWF0IjoxNjQxNDc3MzM5fQ.FR_MwqGbE8CcVbD6rGrgL2R9FwBzhA-x41WGnKhPKsE
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InN0aEB0ZXN0ZSIsInJvbGUiOjEsImlhdCI6MTY0MjE5MTM3MX0.RkEAIUCBrik3sS53ZCUnj8rxOL2aKznS9HTWIhzxJZs
 
 ####
 
@@ -15,9 +15,9 @@ Content-Type: application/json
 Authorization: token xxxxx
 
 {
-    "name" : "Caroline",
-    "email" : "carol@teste",
-    "password" : "carol",
+    "name" : "pedro",
+    "email" : "p@teste",
+    "password" : "1234",
     "role" : 0
 
 }
@@ -31,8 +31,7 @@ Content-Type: application/json
 Authorization: token xxxxx
 
 {
-    "id": 11,
-    "name": "Maria",
+    "id": 24,
     "password":"1234",
     "role": 1
 }

@@ -1,7 +1,7 @@
 module.exports = {
    hostApi: 'http://localhost:8686/',
     
-    tokenLocalStorage : {
+    tokenLocalStorage:{
         headers: {
             Authorization: 'Bearer '+ localStorage.getItem('token')
         }

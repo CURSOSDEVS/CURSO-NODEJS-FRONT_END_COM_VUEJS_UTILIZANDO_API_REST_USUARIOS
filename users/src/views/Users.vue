@@ -87,7 +87,7 @@
                 <div class="card">
                     <header class="card-header">
                         <p class="card-header-title">
-                        Você quer realmente deletar este usuário?
+                        Você quer realmente deletar o usuário {{this.userid}}?
                         </p>
                     </header>
                     <div class="card-content">
@@ -97,7 +97,7 @@
                     </div>
                     <footer class="card-footer">
                         <a href="#" class="card-footer-item" @click="hideModal()">Cancelar</a>
-                        <a href="#" class="card-footer-item">Sim quero apagar este Usuário.</a>
+                        <a href="#" class="card-footer-item" @click="userDelete()">Sim quero apagar este Usuário.</a>
                     </footer>
                 </div>
 
@@ -125,14 +125,14 @@ export default {
     
     created(){
 
-         var req = {
+       /*  var req = {
             headers: {
             Authorization: "Bearer "+ localStorage.getItem('token')
          }
-        }
+        }*/
 
-        axios.get(config.hostApi+'user',req).then(res=>{
-            console.log(res.data)
+        axios.get(config.hostApi+'user',config.tokenLocalStorage).then(res=>{
+            console.log(res.data);
             this.users = res.data;
         }).catch(err=>{
             console.log(err);
@@ -144,10 +144,32 @@ export default {
         },
 
         showModalUser(id){
-            console.log("Id do user: "+ id);
             this.showModal = true;
             this.userid = id;
         },
+
+        userDelete(){
+            var req = config.tokenLocalStorage;
+
+            axios.delete(config.hostApi+'user/'+this.userid, req).then(res=>{
+                this.showModal = false;
+                //Possibilidade de aplicação de filtro
+               //this.users = this.users.filter(u => u.id != this.userid);
+                console.log(res);
+                //console.log(this.users)
+            }).catch(err=>{
+                this.showModal = false;
+                console.log(err);
+            });
+
+            //consultando o banco de dados e atualizando a relação de usuários
+            axios.get(config.hostApi+'user', req).then(res=>{
+                console.log(res.data);
+            }).catch(error=>{
+                console.log(error);
+            });
+
+        }
        
     },
     //essa propriedade possibilita a criação de filtros que serão utilizados no interface com o usuário
