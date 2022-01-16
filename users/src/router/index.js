@@ -7,6 +7,7 @@ import Login from '../views/Login.vue'
 import Users from '../views/Users.vue'
 import axios from 'axios'
 import config from '../config/Config'
+import UserEdit from '../views/UserEdit.vue';
 
 //função para realizar a autenticação de usuário do tipo admin
 function AdminAuth(to, from, next){
@@ -57,6 +58,12 @@ const routes = [
     path: '/admin/users',
     name: 'Users',
     component: Users,
+    beforeEnter: AdminAuth
+  },
+  {
+    path: '/admin/user/edit/:id',
+    name: 'UserEdit',
+    component: UserEdit,
     beforeEnter: AdminAuth
   },
   {

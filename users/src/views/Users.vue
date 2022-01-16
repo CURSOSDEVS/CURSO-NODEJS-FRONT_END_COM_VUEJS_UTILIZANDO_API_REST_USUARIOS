@@ -154,7 +154,7 @@ export default {
             axios.delete(config.hostApi+'user/'+this.userid, req).then(res=>{
                 this.showModal = false;
                 //Possibilidade de aplicação de filtro
-               //this.users = this.users.filter(u => u.id != this.userid);
+                this.users = this.users.filter(u => u.id != this.userid);
                 console.log(res);
                 //console.log(this.users)
             }).catch(err=>{
