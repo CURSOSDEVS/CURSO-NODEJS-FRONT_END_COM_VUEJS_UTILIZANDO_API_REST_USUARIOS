@@ -96,17 +96,22 @@ class UserController{
 
         var result = await User.update(id,name,email,role);
 
-        if(result != undefined){
-            if(result.status == true){
+       // console.log("resultado do update:"+ result.status);
+       // console.log("resultado: "+result);
+       // console.log('Id:'+id+' name: '+name+' email: '+email+' role: '+role);
+
+        //if(result != undefined){
+        if(result.status){
+            if(result.status ){
                 res.status(200);
                 res.send("Usuário atualizado!");
             }else{
-                res.status(400);
+                res.status(406);
                 res.send(result.err)
             }
 
         }else{
-            res.status(400);
+            res.status(406);
             res.send(result.err)
         }
             
@@ -118,9 +123,9 @@ class UserController{
 
         var result = await User.delete(id);
 
-        if(result==true){
+        if(result.status){
             res.status(200);
-            res.send("Usuário deletado");
+            res.send("Tudo OK!");
         }else{
             res.status(406);
             res.send(result.err);

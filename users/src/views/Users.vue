@@ -69,7 +69,9 @@
                         <td>{{user.email}}</td>
                         <td>{{user.role | processRole}}</td>
                         <td>
-                            <button class="button is-primary">Editar</button>
+                            <router-link :to="{name:'UserEdit',params:{id:user.id}}"> 
+                                <button class="button is-primary">Editar</button>
+                            </router-link>
                             <button class="button is-danger"  @click="showModalUser(user.id)" >Excluir</button>
                         </td>
                     </tr>
@@ -125,14 +127,8 @@ export default {
     
     created(){
 
-       /*  var req = {
-            headers: {
-            Authorization: "Bearer "+ localStorage.getItem('token')
-         }
-        }*/
-
-        axios.get(config.hostApi+'user',config.tokenLocalStorage).then(res=>{
-            console.log(res.data);
+        axios.get(config.hostApi+'user', config.tokenLocalStorage).then(res=>{
+          //  console.log(res.data);
             this.users = res.data;
         }).catch(err=>{
             console.log(err);
@@ -149,24 +145,15 @@ export default {
         },
 
         userDelete(){
-            var req = config.tokenLocalStorage;
-
-            axios.delete(config.hostApi+'user/'+this.userid, req).then(res=>{
+            
+            axios.delete(config.hostApi+'user/'+this.userid, config.tokenLocalStorage).then(res => {
+               
+            console.log(res);
                 this.showModal = false;
-                //Possibilidade de aplicação de filtro
                 this.users = this.users.filter(u => u.id != this.userid);
-                console.log(res);
-                //console.log(this.users)
-            }).catch(err=>{
-                this.showModal = false;
+            }).catch(err => {
                 console.log(err);
-            });
-
-            //consultando o banco de dados e atualizando a relação de usuários
-            axios.get(config.hostApi+'user', req).then(res=>{
-                console.log(res.data);
-            }).catch(error=>{
-                console.log(error);
+                this.showModal = false;
             });
 
         }

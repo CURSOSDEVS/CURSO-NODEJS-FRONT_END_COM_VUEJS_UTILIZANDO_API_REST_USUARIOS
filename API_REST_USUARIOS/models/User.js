@@ -89,18 +89,18 @@ class User {
     }
 
     async findById(id){
-        try {
-            var user = await Knex.select(["id","name","email","role"]).from("users").where({id: id});
-
-            //tratando o retorno
-            if(user.length > 0){
-                return  {status:true, user: user[0]};
+       
+        try{
+            var result = await knex.select(["id","email","role","name"]).where({id:id}).table("users");
+            
+            if(result.length > 0){
+                return result[0];
             }else{
                 return undefined;
             }
-            
-        } catch (error) {
-            console.log(error);
+
+        }catch(err){
+            console.log(err);
             return undefined;
         }
     }
@@ -108,9 +108,11 @@ class User {
     async update(id,name,email,role){
 
             var user = await this.findById(id);  
-            
+           // console.log(user);
             //verificando o resultado  
             if(user != undefined){  
+
+              //console.log("User email: "+user.user.email+' email: '+email);
 
                 var editUser = {};
 
@@ -123,13 +125,18 @@ class User {
                         if(result == false){
                             editUser.email = email;
                         }else{
-                            console.log("O email já existe")
+                            //console.log("O email já existe")
                             return {status: false, err: "e-mail já está cadastrado! "};                       
                         }
                     }else{
-                        console.log("O email já existe")
-                            return {status: false, err: "e-mail já está cadastrado! "};  
+                        //console.log("O email já existe")
+                          //  return {status: false, err: "e-mail já está cadastrado! "};  
+                         // console.log(editUser.email+','+email);
+                          editUser.email = email;
                     }
+                }else{
+                    console.log("O email deve ser informado");
+                    return {status: false, err: "O email deve ser informado!"};
                 }
 
                 if(name != undefined){
@@ -154,17 +161,18 @@ class User {
 
     async delete(id){
 
-        var result = await this.findById(id);
+        var user = await this.findById(id);
+        if(user != undefined){
 
-        if(result != undefined){
-            try {
-                await knex.delete().from("users").where({id: id});
-                return {status: true, err:"Usuário deletado"};
-            } catch (error) {
-                return {status: false, err: "Erro ao deletar usuário"};
+            try{
+                await knex.delete().where({id: id}).table("users");
+                return {status: true}
+            }catch(err){
+                return {status: false,err: err}
             }
+        
         }else{
-            return {status: false, err:"Usuário não existe"};
+            return {status: false,err: "O usuário não existe, portanto não pode ser deletado."}
         }
 
     }

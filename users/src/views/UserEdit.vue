@@ -72,13 +72,14 @@ export default {
         var userId = this.$route.params.id;
 
         //verificando se o id passado pelo usuário é valido
-         axios.get(config.hostApi+'user/'+ userId, config.tokenLocalStorage).then(res=>{
-            console.log(res);
+         axios.get(config.hostApi+'user/'+ userId, config.tokenLocalStorage).then(res => {
+           // console.log("resultado"+res);
 
             //pegando os valores que foram buscados no banco de dados pelo axios
-            this.name = res.data.user.user.name;
-            this.email = res.data.user.user.email;
-            this.id = res.data.user.user.id;
+            this.name = res.data.user.name;
+            this.email = res.data.user.email;
+            this.id = res.data.user.id;
+          //  console.log(this.name+this.id+this.email);
 
         }).catch(err=>{
             console.log(err.response);
@@ -92,16 +93,19 @@ export default {
 
     methods:{
         update(){
-            axios.post(config.hostApi+'user',{
+
+            axios.put(config.hostApi+'user',{
+                id: this.id,
                 name: this.name,
                 email: this.email
-            }).then(res =>{
+            }, config.tokenLocalStorage).then(res =>{
                 console.log(res);
-                this.$router.push({name: 'SucessRegister'});
+                this.$router.push({name: 'Users'});
             }).catch(err=>{
-                var errMens = err.response.data.err;
+                var errMens = err.response.data;
+                console.log("erro ao editar o usuário: "+ errMens);
                 this.error = errMens;
-            });
+            })
         }
     }
 
